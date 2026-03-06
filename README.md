@@ -1,4 +1,4 @@
-# agente-ia-generica
+# api-agente-ia-generica
 
 API generica de Agente de IA 100% serverless en AWS para evaluar contenido markdown usando instrucciones markdown almacenadas en S3 y procesadas con Groq, devolviendo salida JSON.
 
@@ -10,7 +10,6 @@ API generica de Agente de IA 100% serverless en AWS para evaluar contenido markd
   - `content_s3_link`
 - Leer markdown desde S3 en formato:
   - `s3://bucket/key.md`
-  - URL S3 `https://...amazonaws.com/...`
 - Construir un prompt unificado con instrucciones + contenido.
 - Invocar Groq con modelo `llama-3.3-70b-versatile`.
 - Retornar la salida de Groq en `application/json`.
@@ -66,47 +65,27 @@ API generica de Agente de IA 100% serverless en AWS para evaluar contenido markd
 
 ## Despliegue automatico (Serverless Framework v4)
 
-1. Instala Node.js LTS (18+ recomendado) y Serverless Framework v4:
-
-```bash
-npm install -g serverless@4
-```
-
-2. Autentica Serverless Framework (requerido por v4):
+1. Autentica Serverless Framework (requerido por v4):
 
 ```bash
 serverless login
 ```
 
-3. Configura credenciales AWS con acceso al rol `LabRole` (entorno de laboratorio).
+2. Configura credenciales AWS (.aws/credentials)
 
-4. Define la API Key de Groq en tu shell.
-
-PowerShell:
-
-```powershell
-$env:GROQ_API_KEY = "tu_api_key_de_groq"
-```
-
-Bash:
+3. Define la API Key de Groq en tu shell.
 
 ```bash
 export GROQ_API_KEY="tu_api_key_de_groq"
 ```
 
-5. Despliega automaticamente:
+4. Despliega automaticamente:
 
 ```bash
 serverless deploy
 ```
 
-6. Consulta la URL desplegada:
-
-```bash
-serverless info --verbose
-```
-
-7. (Opcional) Eliminar recursos:
+5. (Opcional) Eliminar recursos:
 
 ```bash
 serverless remove
@@ -129,7 +108,7 @@ Importa el archivo `postman/agente-ia-generica.postman_collection.json`.
 
 Configura la variable `baseUrl` con el endpoint base, por ejemplo:
 
-- `https://<api-id>.execute-api.us-east-1.amazonaws.com/dev`
+- `https://<api-id>.execute-api.us-east-1.amazonaws.com`
 
 ## Metadatos de creacion
 
@@ -154,7 +133,7 @@ Crea un api genérica Agente de IA con estas funcionalidades:
 - Procesamiento:
   - Generar un prompt con las instrucciones y contenido y enviarlo al Api IA de Groq
 - Salida del api:
-  - Mostrar como salida lo que responda el Api IA en formato markdown    
+  - Mostrar como salida lo que responda el Api IA en formato json    
 
 ## Requisitos de la respuesta
 - Para la IaC (Infraestructura como código) utiliza el framework serverless versión 4 con rol de IAM LabRole existente.
@@ -168,3 +147,4 @@ Crea un api genérica Agente de IA con estas funcionalidades:
 ## Elementos adicionales
 -
 ```
+
